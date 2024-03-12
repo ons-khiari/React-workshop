@@ -6,6 +6,8 @@ import { useEffect, useState } from "react"
 import { deleteEvent, getallEvents } from "../service/api"
 import { useDispatch, useSelector } from "react-redux"
 import { deleteEventReducer, selectEvents } from "../redux/slices/eventsSlice"
+
+
 function Events() {
   const [eventsData] = useSelector(selectEvents)
   const dispatch = useDispatch()
