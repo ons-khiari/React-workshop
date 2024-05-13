@@ -5,34 +5,45 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addEventReducer } from '../redux/slices/eventsSlice';
 
-function AddEvent() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [eventItem, setEventItem] = useState({
-    name: "",
-    description: "",
-    img: "",
-    price: 0,
-    nbTickets: 0,
-    nbParticipants: 0,
-    like: false
-  })
+function AddEvent() { 
 
-  const onValueChange = (e) => {
-    setEventItem({ ...eventItem, [e.target.name]: e.target.value })
-  }
 
-  const onFile = (e) => {
-    setEventItem({ ...eventItem, [e.target.name]: e.target.files[0].name })
-  }
 
-  const AddEvent = async () => {
-    const eventResult = await addEvent(eventItem)
-    dispatch(addEventReducer(eventItem))
-    if (eventResult.status == 201) {
-      navigate("/events")
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+     const  [eventItem , setEventItem] = useState({
+        name:"",
+        description:"",
+        img:"",
+        price:0,
+        nbTickets:0,
+        nbParticipants:0,
+        like:false
+    })
+
+
+    const onValueChange =(e)=>{
+
+        setEventItem({...eventItem , [e.target.name] : e.target.value})
+   
     }
-  }
+
+
+    const onFile =(e)=>{
+
+        setEventItem({...eventItem , [e.target.name]:e.target.files[0].name})
+    }
+
+
+    const AddEvent = async()=>{
+
+        const eventResult = await addEvent(eventItem)
+
+        dispatch(addEventReducer(eventItem))
+        if(eventResult.status ==201){
+            navigate("/events")
+        }
+    }
 
   return (
     <Container style={{ marginTop: "30px" }}>
@@ -40,9 +51,9 @@ function AddEvent() {
       <Form>
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
-          <Form.Control
+          <Form.Control 
 
-            onChange={(e) => onValueChange(e)}
+          onChange={(e)=>onValueChange(e)}
             name="name"
             value={eventItem.name}
             type="text"
@@ -52,8 +63,8 @@ function AddEvent() {
         <Form.Group className="mb-3">
           <Form.Label>Description</Form.Label>
           <Form.Control
-            onChange={(e) => onValueChange(e)}
-            value={eventItem.description}
+                    onChange={(e)=>onValueChange(e)}
+                    value={eventItem.description}
 
             as="textarea"
             rows={3}
@@ -65,8 +76,8 @@ function AddEvent() {
           <Form.Label>Price</Form.Label>
           <Form.Control
 
-            onChange={(e) => onValueChange(e)}
-            value={eventItem.price}
+onChange={(e)=>onValueChange(e)}
+value={eventItem.price}
             type="number"
             name="price"
           />
@@ -75,8 +86,8 @@ function AddEvent() {
           <Form.Label>Number of Tickets</Form.Label>
           <Form.Control
 
-            onChange={(e) => onValueChange(e)}
-            value={eventItem.nbTickets}
+onChange={(e)=>onValueChange(e)}
+value={eventItem.nbTickets}
             type="number"
             name="nbTickets"
           />
@@ -87,13 +98,13 @@ function AddEvent() {
             type="file"
             name="img"
 
-            onChange={(e) => onFile(e)}
+            onChange={(e)=>onFile(e)}
           />
         </Form.Group>
         <Button variant="primary" onClick={AddEvent}>
           Add an Event
         </Button>
-        <Button variant="secondary">
+        <Button  variant="secondary">
           Cancel
         </Button>
       </Form>
